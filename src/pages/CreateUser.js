@@ -1,18 +1,13 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import userActions from "../actions/userActions";
-import userStore from "../store/userStore";
 
 const Admin = props => {
   let nameValue = "";
   let passwordValue = "";
+  let usersInformations = useSelector(state => state.user);
 
-  let loginInformation, usersInformation;
-
-  userStore.subscribe(() => {
-    console.log("listening!");
-    loginInformation = userStore.getState().login;
-    usersInformation = userStore.getState().user;
-  });
+  const dispatcher = useDispatch();
 
   const handleChangeName = event => {
     nameValue = event.target.value;
@@ -24,27 +19,17 @@ const Admin = props => {
 
   const handleLogin = event => {
     event.preventDefault();
-    userStore.dispatch(
-      userActions.LOGIN_USER({
-        name: nameValue,
-        password: passwordValue
+    dispatcher(
+      userActions.ADD_USER({
+        userId: usersInformations.length,
+        informations: { name: nameValue, password: passwordValue }
       })
     );
-
-    for (let i = 0; i < usersInformation.length; i++) {
-      if (
-        JSON.stringify(loginInformation) === JSON.stringify(usersInformation[i])
-      ) {
-        console.log("we did it!");
-        props.history.push("/home");
-        i = usersInformation.length;
-      }
-    }
   };
 
   return (
     <div id="admin">
-      <h1>Login</h1>
+      <h1>Create User</h1>
 
       <form id="login-form" onSubmit={handleLogin}>
         <div className="user-input">
@@ -65,7 +50,7 @@ const Admin = props => {
             onChange={handleChangePassword}
           />
         </div>
-        <input id="button-login" type="submit" value="Login" />
+        <input id="button-login" type="submit" value="Add user" />
       </form>
     </div>
   );

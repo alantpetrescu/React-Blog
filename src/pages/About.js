@@ -1,6 +1,6 @@
 import React from "react";
-import Nav from "../components/Nav";
-import AboutBody from "../components/AboutBody";
+import Nav from "../components/pageComponents/Nav";
+import AboutBody from "../components/pageComponents/AboutBody";
 
 const About = () => {
   return (

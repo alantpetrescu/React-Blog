@@ -1,12 +1,11 @@
-import React, { useContext } from "react";
-import { BlogContext } from "../store/BlogContext";
+import React from "react";
+import { useDispatch } from "react-redux";
+import userStore from "../store/userStore";
 
 const UserDisplayer = ({ userId }) => {
-  const [users, setUsers] = useContext(BlogContext);
-
   return (
     <div id="user-displayer">
-      <h1>Welcome back {users[userId].name}!</h1>
+      <h1>Welcome back</h1>
     </div>
   );
 };

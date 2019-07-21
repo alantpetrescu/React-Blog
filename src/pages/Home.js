@@ -1,6 +1,6 @@
 import React from "react";
-import Nav from "../components/Nav";
-import HomeBody from "../components/HomeBody";
+import Nav from "../components/pageComponents/Nav";
+import HomeBody from "../components/pageComponents/HomeBody";
 
 const Home = () => {
   const userId = 0;
